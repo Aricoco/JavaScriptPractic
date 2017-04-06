@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>保护网页源代码</title>
+    <script type="text/javascript">
+        function clear(){
+            Source = document.body.innerHTML;
+            document.open();
+            document.write("代码已经被屏蔽");
+            document.close();
+            document.title("看不到源代码");
+            document.body.innerHTML = Source;
+        }
+    </script>
+</head>
+<body onload="clear()">
+    <marquee>测试下能否看到源代码</marquee>
+</body>
+</html>

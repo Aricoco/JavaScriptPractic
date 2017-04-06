@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">s
+    <title>渐变背景</title>
+    <style>
+        *{padding:0;margin:0;}
+        body #wrap{width: 100%;height: 500PX;backgound:-webkit-linear-gradient(left,rgb(0,0,0),#60c3ff)}
+    </style>
+    <script>
+        /*GRB色盘变化
+        *    1.RGB颜色的变化只有 ++ --
+        *    2.什么时候发生改变
+        *    3.阈值： r:255 g:0
+        *    {
+        *       if(R==255&&G==0) B++;
+        *       if(B==255&&G==0) R--;
+        *       if(B==255&&R==0) G++;
+        *       if(G==255&&R==0) B--;
+        *       if(G==255&&B==0) R++;
+        *       if(R==255&&B==0) G--;
+        *    }
+        *    4.数据分析归类
+        *    {
+        *       if(G==255&&B==0) R++;
+        *       if(B==255&&R==0) G++;
+        *       if(R==255&&G==0) B++;
+        *
+        *       if(G==0&&B==255) R--;
+        *       if(B==0&&R==255) G--;
+        *       if(R==0&&G==255) B--;
+        *    }
+        *    5. 解决方案转化正代码
+        *    {
+        *
+        *    }
+        *
+        *
+        * */
+        (function (){
+            var oWrap = document.querySelector("#wrap");
+            var max=220;
+            var min=180;
+            var color=[max,min,min];/*根据初始红色来舒适化数组*/
+            var colorL;
+            var colorR;
+            var timer=null;
+
+            timer=setInterval(change,20);
+
+            function change(){
+                var length=color.length;
+                for(var i=0;i<length;i++) {
+                    i %= length;
+                    var arrX = (i+1) % length
+                    var arrY = (i+2) % length
+
+                    if(color[i]==max && color[arrX]==min){
+                        color[arrY]++;
+                    }
+                    if(color[i]==min && color[arrX]==max){
+                        color[arrY]--;
+                    }
+                    colorL = 'rgb('+color[0]+','+color[1]+','+color[2]+')';
+                    colorR = 'rgb('+color[2]+','+color[0]+','+color[1]+')';
+
+                    /*    if(color[1]==255&&color[2]==0) color[0]++;
+                     if(color[2]==255&&color[0]==0) color[1]++;
+                     if(color[0]==255&&color[1]==0) color[2]++;
+
+                     if(color[1]==0&&color[2]==255) color[0]--;
+                     if(color[2]==0&&color[0]==255) color[1]--;
+                     if(color[0]==0&&color[1]==255) color[2]--;  */
+                }
+            }
+
+            function gColor(colorl,colorR){
+
+                oWrap.style.background="(-webkit-linear-gradient(left,"+colorL+","+colorR+")"
+                oWrap.style.background="(-ws-linear-gradient(left,"+colorL+","+colorR+")"
+                oWrap.style.background="progid:DXImageTransform.Microsoft.gradient(startColorstr="+colorL+",endColorstr="+colorR+",GradientType="0 +")"
+            }
+        })();
+
+    </script>
+</head>
+<body id="wrap">
+
+</body>
+</html>

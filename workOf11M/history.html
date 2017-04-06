@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>前进 /后退</title>
+    <script type="text/javascript">
+        function goBack (){
+            history.go(-1);
+        }
+        function goOn (){
+            history.go(+1);
+        }
+        function refresh(){
+            history.go(-0);
+        }
+
+        <!--historry.rorward()  = history.go(+1)-->
+        <!--historry.back()  = history.go(-1)-->
+    </script>
+</head>
+<body>
+    <button id="go_on"  onclick="goOn()">前进</button>
+    <input type="button" value="刷新" onclick="refresh()">
+    <button id="go_down" onclick="goBack()">后退</button>
+</body>
+</html>

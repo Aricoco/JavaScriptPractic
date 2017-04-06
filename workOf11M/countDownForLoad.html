@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时载入页面</title>
+    <meta http-equiv="refresh" content="11;url=https://baidu.com">
+    <style type="text/css">
+        *{
+            margin: 0 ;
+            padding: 0;
+        }
+        div{margin:0 auto;
+            text-align: center;
+            background-color: #F6D66E;
+            height: 300px;
+            width: 700px;
+        }
+    </style>
+    <script language="JavaScript">
+        //获取当前时间
+        startday = new Date();
+        clockStart = startday.getTime();
+        function innitStopWatch(){
+            var myTime = new Date();
+            var timeNow = myTime.getTime();
+            var timeDiff = timeNow - clockStart;
+            this.diffSecs = timeDiff/1000;
+            return (this.diffSecs);
+        }
+        function getSecs (){
+            var mySecs = innitStopWatch();
+            var mySecs1 = ""+mySecs;
+            mySecs1 = 10 - eval(mySecs1.substring(0,mySecs1.indexOf("."))) + "秒";
+            document.form1.timespent.value=mySecs1;
+            window.setTimeout('getSecs()',1000);
+        }
+    </script>
+</head>
+<body  bgcolor="#ffffff" onload="window.setTimeout('getsecs()',1)">
+    <div>
+        <h style="text-align: center">10秒后将加载页面</h>
+        <form name="form1">
+            <input size="9" name=timespent>
+        </form>
+    </div>
+</body>
+</html>

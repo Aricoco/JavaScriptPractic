@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>星星评分</title>
+    <style>
+        body,div,ul,li,p{padding:0;margin:0;}
+        body{font: 14px/1.5 Arial;color:darkslategray }
+        ul{list-style-type:none;}
+        #star{position:relative;width:600px;margin:10px auto;}
+        #star ul,#star span{float:left;display:inline;height:19px;line-height:19px;}
+        #star ul{magin:0 10px;}
+        #star li {float:left;text-indent:-9999px;background:url("img/star.png") no-repeat;width:24px;cursor:pointer;}
+        #star p{position:absolute;top:20px;width: 159px; height: 60px;
+                background:url("img/icon.gif") no-repeat;display: none;padding:2px  5px 7px 7px;}
+        #star p em{font-style:normal;display:block;color: orange;}
+
+        #star li.on{background-position: 0 -28px;}
+
+    </style>
+    <script>
+        window.onload = function(){
+            var st = document.getElementById("star");
+            var stLi = st.getElementsByTagName("li");
+            //评分
+            var i=iScore=iStar=0;
+            var stP = document.getElementsByTagName("p")[0];
+            var stU = document.getElementsByTagName("ul")[0];
+            var stSpan = document.getElementsByTagName("span")[1];
+            //评价文字
+            var stWord = [
+                "很不满意|差得太离谱，与卖家描述的严重不符，非常不满",
+                "不满意|部分有破损，与卖家描述的不符，不满意",
+                "一般|质量一般，没有卖家描述的那么好",
+                "满意|质量不错，与卖家描述的基本一致，还是挺满意的",
+                "非常满意|质量非常好，与卖家描述的完全一致，非常满意"
+            ];
+
+            for( i=1;i<=stLi.length;i++){
+                stLi[i-1].index = i;
+                stLi[i-1].onmouseover= function(){
+                    mouseO(this.index);
+                    stP.style.display="block";
+                    //浮动层位置
+                    stP.style.left =  stU.offsetLeft + this.index * this.offsetWidth -104 +"px";
+                    //浮动层文字
+                    stP.innerHTML = "<em><b>" + this.index + "</b> 分 " + stWord[this.index-1].match(/(.+)\|/)[1] + "</em>" + stWord[this.index-1].match(/\|(.+)/)[1]
+                }
+                stLi[i-1].onmouseout =function (){
+                    mouseO(this.index);
+                    stP.style.display="none";
+                }
+                stLi[i-1].onclick = function(){
+                    iScore = this.index;
+                    stP.style.display="none";
+                    stSpan.innerHTML = "<strong>"+iScore+"</strong>分(" + stWord[this.index-1].match(/\|(.+)/)[1]+")";
+                }
+
+            }
+            //评分分数
+            function mouseO(point){
+                iScore = point || iStar ;
+                for(i=0;i<stLi.length;i++){
+                    stLi[i].className = i  < iScore ? "on":"";
+
+                }
+            }
+        }
+
+
+
+    </script>
+</head>
+<body>
+    <div id="star">
+        <span>点击星星打分</span>
+        <ul>
+            <li><a href="javascript:;">1</a></li>
+            <li><a href="javascript:;">2</a></li>
+            <li><a href="javascript:;">3</a></li>
+            <li><a href="javascript:;">4</a></li>
+            <li><a href="javascript:;">5</a></li>
+        </ul>
+        <span></span>
+        <p></p>
+    </div>
+</body>
+</html>

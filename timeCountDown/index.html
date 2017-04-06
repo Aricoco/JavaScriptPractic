@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计时器</title>
+    <style>
+        body,div{padding :0;margin :0}
+        body{font:16px/1.5 microsoft yahei;color:wheat;}
+        #countDown{width:300px;text-align:center;background:#000;margin:10px auto;padding:20px 0;}
+        input{border:0;width:283px;height:50px;cursor:pointer;background:url(img/btn-1.png) no-repeat;margin-top: 20px;}
+
+        span{color:#000;width:80px;line-height: 2;background:gainsboro;border:2px solid grey;margin:0 10px ; padding:0 10px;}
+    </style>
+    <script>
+        window.onload = function(){
+            var countD = document.getElementById("countDown");
+            var inputD = document.getElementsByTagName("input")[0];
+            var timeI  = null;
+
+            inputD.onclick = function(){
+                this.className == "" ? (timeI = setInterval(updateTime,1000),updateTime()) : (clearInterval(timeI));
+                this.className = this.className == '' ? "cancel" : '';
+            };
+
+            function updateTime(){
+                var countS = countD.getElementsByTagName("span");
+                var countTime = countS[0].innerHTML.replace(/^0/,'') * 60 + parseInt(countS[1].innerHTML.replace(/^0/,'')) ;
+                if(countTime <= 0){
+                    clearInterval(timeI);
+                    return;
+                };
+                countTime--;
+                countS[0].innerHTML =  format(parseInt(countTime/60)) ;
+                countTime %= 60 ;
+                countS[1].innerHTML = format(parseInt(countTime)) ;
+            }
+
+            function format(a)
+            {
+                return a.toString().replace(/^(\d)$/,'0$1')
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+    <div id="countDown">
+        <span>01</span> 分钟<span>40</span>秒
+        <input type="button" value="">
+    </div>
+
+
+</body>
+</html>

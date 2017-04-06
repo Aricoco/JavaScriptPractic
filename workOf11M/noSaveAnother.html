@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>禁止网页另存为</title>
+    <!--禁止网页加入缓存-->
+    <meta HTTP-EQUIV="Pragma" comtent="no-cache">
+</head>
+<body onUnload=window.alert("欢迎下次访问")>
+    <!-- noscript & iframe 结合  禁止页面另存为-->
+    <iframe onload=alert("加载完毕") src='https://www.baidu.com'></iframe>
+    <noscript>
+        <iframe src=*.html></iframe>
+    </noscript>
+</body>
+</html>
